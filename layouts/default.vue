@@ -1,13 +1,22 @@
 <template>
   <div id="page-container">
-    <b-navbar class="navbar header has-shadow is-primary" role="navigation" aria-label="main navigation">
+    <b-navbar
+      class="navbar header has-shadow is-primary"
+      role="navigation"
+      aria-label="main navigation"
+    >
       <template slot="brand">
         <b-navbar-item tag="router-link" :to="{ path: '/' }">
-           <h3 class="title page-title">Emoji Builder</h3>
+          <h3 class="title page-title">Emoji Builder</h3>
         </b-navbar-item>
       </template>
       <template slot="start">
-        <b-navbar-item v-for="(item, i) in items" :key="i" :href="item.to.name">{{ item.title }}</b-navbar-item>
+        <nuxt-link
+          class="navbar-item"
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.to.name"
+        >{{ item.title }}</nuxt-link>
       </template>
 
       <!-- <template slot="end">
@@ -19,7 +28,7 @@
             <a class="button is-light">Log in</a>
           </div>
         </b-navbar-item>
-      </template> -->
+      </template>-->
     </b-navbar>
 
     <section class="main-content columns">
