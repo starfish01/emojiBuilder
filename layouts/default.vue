@@ -1,18 +1,26 @@
 <template>
   <div id="page-container">
-    <nav class="navbar header has-shadow is-primary" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <h3 class="title page-title">Emoji Builder</h3>
-        </a>
+    <b-navbar class="navbar header has-shadow is-primary" role="navigation" aria-label="main navigation">
+      <template slot="brand">
+        <b-navbar-item tag="router-link" :to="{ path: '/' }">
+           <h3 class="title page-title">Emoji Builder</h3>
+        </b-navbar-item>
+      </template>
+      <template slot="start">
+        <b-navbar-item v-for="(item, i) in items" :key="i" :href="item.to.name">{{ item.title }}</b-navbar-item>
+      </template>
 
-        <!-- <div class="navbar-burger">
-          <span />
-          <span />
-          <span />
-        </div>-->
-      </div>
-    </nav>
+      <!-- <template slot="end">
+        <b-navbar-item tag="div">
+          <div class="buttons">
+            <a class="button is-primary">
+              <strong>Sign up</strong>
+            </a>
+            <a class="button is-light">Log in</a>
+          </div>
+        </b-navbar-item>
+      </template> -->
+    </b-navbar>
 
     <section class="main-content columns">
       <div class="column is-2"></div>
@@ -27,11 +35,17 @@
           <strong>Emoji Builder</strong> by
           Patrick.
         </p>
-
       </div>
 
       <div class="content has-text-centered">
-        <div class="credits center"><p>Copyright ©2006-{{new Date().getFullYear()}} | <n-link to="/privacy">Privacy Policy</n-link> | <n-link to="/sitemap">Sitemap</n-link> | <n-link to="/about">About</n-link></p></div>
+        <div class="credits center">
+          <p>
+            Copyright ©2020-{{new Date().getFullYear()}} |
+            <n-link to="/privacy">Privacy Policy</n-link>|
+            <n-link to="/sitemap">Sitemap</n-link>|
+            <n-link to="/about">About</n-link>
+          </p>
+        </div>
       </div>
     </footer>
   </div>
@@ -45,12 +59,17 @@ export default {
         {
           title: "Home",
           icon: "home",
-          to: { name: "index" }
+          to: { name: "/" }
         },
         {
-          title: "Inspire",
-          icon: "lightbulb",
-          to: { name: "inspire" }
+          title: "How To",
+          icon: "home",
+          to: { name: "how_to" }
+        },
+        {
+          title: "Previous Creations",
+          icon: "home",
+          to: { name: "preview" }
         }
       ]
     };
@@ -72,17 +91,19 @@ export default {
   flex-direction: column;
 }
 
-html, body, #__nuxt, #__layout {
+html,
+body,
+#__nuxt,
+#__layout {
   height: 100%;
   margin: 0;
 }
 
 .main-content {
-    flex: 1 0;
+  flex: 1 0;
 }
 
 .footer {
   flex: 0 1;
 }
-
 </style>
