@@ -8,7 +8,7 @@
       <div class="column is-4">
         <div style="margin-top:auto; width: 100%">
           <b-field label="Text" label-position="on-border">
-            <b-input v-on:change="backgroundImageChange" v-model="emojiText"></b-input>
+            <b-input placeholder=":smile:" v-on:change="backgroundImageChange" v-model="emojiText"></b-input>
             <p class="control">
               <b-button @click="isTextModal = true" class="button is-primary">
                 <i class="material-icons">mood</i>
@@ -31,7 +31,7 @@
       <div class="column is-4">
         <div style="margin-top:auto; width: 100%">
           <b-field label="Background" label-position="on-border">
-            <b-input v-model="emojiBackground"></b-input>
+            <b-input placeholder=":fire:" v-model="emojiBackground"></b-input>
             <p class="control">
               <b-button @click="isBackgroundModal = true" class="button is-primary">
                 <i class="material-icons">mood</i>
@@ -66,7 +66,11 @@
       </div>
     </div>
     <div class="columns is-centered">
+      <div class="column is-12">Currently supports A-Z, 0-9, and ?#!%</div>
+    </div>
+    <div class="columns is-centered">
       <div class="column is-12">
+        <client-only>
         <table style="margin-bottom:15px">
           <tr v-for="row in generateMatrix" :key="row.id">
             <td
@@ -77,7 +81,8 @@
             ></td>
           </tr>
         </table>
-        <div class="buttons">
+        </client-only>
+        <div class="buttons" v-if="lineData.length > 0">
           <b-button @click="copiedItem()" v-clipboard:copy="copyMatrix">Copy Emoji Text</b-button>
         </div>
         <!-- <b-field label="Output" label-position="on-border">
@@ -105,6 +110,11 @@ export default {
       matrix: [],
       isBackgroundModal: false,
       isTextModal: false
+    };
+  },
+  head() {
+    return {
+      title: "Emoji Builder"
     };
   },
   computed: {
@@ -220,9 +230,8 @@ export default {
   },
   methods: {
     backgroundImageChange() {
-      console.log("ffff");
+      // console.log("ffff");
       // const valueToCheck = value ? this.emojiText : this.emojiBackground;
-
       // this.emojiData.forEach(emoji => {
       //   if (emoji.code === valueToCheck) {
       //     console.log(emoji.imgUrl);
@@ -231,6 +240,29 @@ export default {
       // });
     },
     copiedItem() {
+      let emojiText = [];
+
+      _.forEach(this.lineData, line => {
+        emojiText.push(line.value);
+      });
+
+      var d = new Date();
+      var n = d.getTime();
+
+      let textData = {
+        text: emojiText,
+        id: n,
+        emojiText: this.matrix[0].emojiText,
+        emojiBackground: this.matrix[0].emojiBackground,
+        // matrix: this.matrix
+      };
+
+      let cookieArray = this.$cookies.get("emoji-Builder")
+        ? this.$cookies.get("emoji-Builder")
+        : [];
+      cookieArray.push(textData);
+      this.$cookies.set("emoji-Builder", JSON.stringify(cookieArray));
+
       this.$buefy.toast.open("Copied to Clipboard!");
     },
     emojiSelected(selected, sectionPicked) {

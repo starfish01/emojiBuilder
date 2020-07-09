@@ -49,10 +49,10 @@
       <div class="content has-text-centered">
         <div class="credits center">
           <p>
-            Copyright ©2020-{{new Date().getFullYear()}} |
-            <n-link to="/privacy">Privacy Policy</n-link>|
-            <n-link to="/sitemap">Sitemap</n-link>|
-            <n-link to="/about">About</n-link>
+            <!-- Copyright ©2020-{{new Date().getFullYear()}} | -->
+            <n-link to="/privacy">Privacy Policy </n-link>|
+            <n-link to="/sitemap"> Sitemap </n-link>|
+            <n-link to="/about"> About</n-link>
           </p>
         </div>
       </div>
@@ -70,17 +70,22 @@ export default {
           icon: "home",
           to: { name: "/" }
         },
-        {
-          title: "How To",
-          icon: "home",
-          to: { name: "how_to" }
-        },
+        // {
+        //   title: "How To",
+        //   icon: "home",
+        //   to: { name: "how-to" }
+        // },
         {
           title: "Previous Creations",
           icon: "home",
-          to: { name: "preview" }
+          to: { name: "previous" }
         }
       ]
+    };
+  },
+  head() {
+    return {
+      title: "Emoji Builder"
     };
   }
 };
@@ -114,5 +119,6 @@ body,
 
 .footer {
   flex: 0 1;
+  padding: 1.5rem 1.5rem 3rem;
 }
 </style>

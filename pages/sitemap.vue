@@ -1,9 +1,14 @@
 <template>
   <section class="section">
     <h2 class="title is-3 has-text-grey">Sitemap</h2>
-    <hr>
+    <hr />
     <ol>
-      <li><n-link to="/">Emoji Builder</n-link></li>
+      <li>
+        <n-link to="/">Emoji Builder</n-link>
+      </li>
+      <li>
+        <n-link to="/previous">Previous Creations</n-link>
+      </li>
       <li>
         <n-link to="/privacy">Privacy Policy</n-link>
       </li>

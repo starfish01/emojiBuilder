@@ -50,7 +50,6 @@ export default {
       return title.replace("-", " ");
     },
     selectedEmoji(code) {
-      console.log(code);
       this.$emit("pickedEmoji", code);
     }
   },
