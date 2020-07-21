@@ -61,9 +61,14 @@
 </template>
 
 <script>
+
+import EmojiMatrix from '../plugins/emojiMatrix';
+
+
 export default {
   data() {
     return {
+      matrixTest: '',
       items: [
         {
           title: "Home",
@@ -82,6 +87,14 @@ export default {
         }
       ]
     };
+  },
+  mounted() {
+    //  this.matrixTest = 'something';
+
+    //   const emojiMatrix = new EmojiMatrix();
+
+    //   this.matrixTest = emojiMatrix.helloworld();
+
   },
   head() {
     return {
